@@ -1,0 +1,11 @@
+.card {
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+    width: 20%;
+    margin: 1.5rem;
+  }
+
+.card:hover{
+  box-shadow: 10px 10px 5px 0px rgba(87,0,168,1);
+}
