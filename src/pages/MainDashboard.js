@@ -16,12 +16,12 @@ const MainDashboard = () => {
     {
       title: "Patients Visits Record",
       image: "https://img.icons8.com/color/96/000000/call-in-bed.png",
-      link: "/patiens/visits",
+      link: "/dashboard/patiens/visits",
     },
     {
       title: "Follow Up Stats",
       image: "https://img.icons8.com/fluent/96/000000/feedback-hub.png",
-      link: "/patiens/followups",
+      link: "/dashboard/patiens/followups",
     },
     {
       title: "Call Recordings",
