@@ -4,11 +4,13 @@ const clinicDetailsSlice = createSlice({
     name: "details", 
     initialState: {
         detailsAreVisible: false,
-        notifications: null
+        notifications: null,
+        clinicId: null
     },
     reducers: {
       toggle(state, action) {
         state.detailsAreVisible = true;
+        state.clinicId = action.payload;
       },
       showNotification(state, action){
         state.notification = {

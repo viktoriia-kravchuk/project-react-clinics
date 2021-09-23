@@ -2,6 +2,7 @@ import React from "react";
 import AllClinicsTableItem from "./AllClinicsTableItem";
 
 const AllClinicsTable = (props) => {
+
   const allClinics = props.allClinics;
 
   const clinicsHeader = (

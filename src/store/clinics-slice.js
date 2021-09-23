@@ -15,8 +15,15 @@ const clinicsSlice = createSlice({
         addClinic(state,action){
 
         },
-        showClinicDetails(state, action){
-            const id = action.payload;
+        uploadClinicImages(state, action){
+            console.log("slice", action.payload);
+            const {id, newImage, imageType} = action.payload;
+            const clinicId = state.clinics.findIndex((item) => item.id === id);  
+            if (state.clinics[clinicId].images) {
+                state.clinics[clinicId].images.push({"id": newImage, "type": imageType })
+            } else{
+                state.clinics[clinicId]["images"] = JSON.stringify({"id": newImage, "type": imageType });
+            }
 
         },
         updateClinicInfo(state, action){

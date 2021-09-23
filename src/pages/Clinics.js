@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import SideNavigation from "../components/UI/SideNavigation";
-import AllClinicsTable from "../components/AllClinicsTable";
+import AllClinicsTable from "../components/clinicsPage/AllClinicsTable";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchClinicsData } from "../store/clinics-actions";
-import ClinicDetailsCard from "../components/ClinicDetailsCard";
+import ClinicDetailsCard from "../components/clinicsPage/ClinicDetailsCard";
 import { detailsActions } from "../store/ui-clinic-details-slice";
 import { clinicsActions } from "../store/clinics-slice";
 
@@ -24,6 +24,9 @@ const Clinics = (props) => {
   const showDetailsHandler = (clinic) => {
     dispatch(detailsActions.toggle(clinic.id));
     setClinic(clinic);
+    console.log("clinics", clinic);
+
+
     // if(clinic.images){
     //   console.log("Images")
     // }else{
@@ -43,18 +46,16 @@ const Clinics = (props) => {
           <div className="card">
             <div className="card-header">
               <div className="row">
-                <div className="col-md-12">
                   <div className="col-md-3">
                     <h4 className="text-primary ng-binding">
                       Clinics: {clinics.length}
                     </h4>
                   </div>
                   <div className="col-md-9">
-                    <button className="btn btn-primary pull-right">
+                    <button className="btn btn-primary float-end">
                       Add New Clinic
                     </button>
-                  </div>
-                </div>
+                    </div>
               </div>
             </div>
             <div className="card-body">

@@ -1,14 +1,14 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { clinicsActions } from "../store/clinics-slice";
+import { useDispatch} from "react-redux";
+import { clinicsActions } from "../../store/clinics-slice";
 
 const AllClinicsTableItem = (props) => {
-  const { id, name, address, time, images } = props.clinicItem;
+  const { id, name, address, time, images} = props.clinicItem;
 
   const dispatch = useDispatch();
 
   const showDetailsHandler = () => {
-    props.showDetails({ name, images });
+    props.showDetails({ id, name, images });
   };
 
   const updateClinicInfoHandler = () => {
@@ -16,7 +16,7 @@ const AllClinicsTableItem = (props) => {
   };
 
   return (
-    <tr className="ng-scope">
+    <tr className="ng-scope" key={id}>
       <td className="ng-binding">{id}</td>
       <td className="ng-binding">{name}</td>
       <td className="ng-binding">{address}</td>
