@@ -6,7 +6,6 @@ import DashboardAnalytics from "./pages/DashboardAnalytics";
 import Clinics from "./pages/Clinics";
 
 function App() {
-
   return (
     <Layout>
       <Switch>
@@ -21,7 +20,7 @@ function App() {
         <Route path="/dashboard/patiens/followups"></Route>
         <Route path="/dashboard/call-recordings"></Route>
         <Route path="/dashboard/clinics">
-          <Clinics/>
+          <Clinics />
         </Route>
         <Route path="/dashboard/patiens"></Route>
         <Route path="/dashboard/agents"></Route>

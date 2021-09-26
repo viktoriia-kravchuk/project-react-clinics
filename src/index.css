@@ -50,6 +50,13 @@ html,body {
     height: 100%;
 
 }
+img{
+
+    width: 100% !important;
+    height: 15vw !important;
+    object-fit: cover !important;
+
+}
 /*
  * Base structure
  */

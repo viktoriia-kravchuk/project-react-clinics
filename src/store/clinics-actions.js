@@ -12,11 +12,11 @@ export const fetchClinicsData = (clinics) => {
         throw new Error("Could not fetch data!");
       }
       const data = await response.json();
-      //console.log(data);
       return data;
     };
     try {
       const clinicsData = await fetchData();
+      console.log(clinicsData);
       dispatch(
         clinicsActions.showClinics({
           clinics: clinicsData.clinics,
@@ -29,21 +29,25 @@ export const fetchClinicsData = (clinics) => {
   };
 };
 
-export const sendClinicData = (clinic) => {
+export const sendClinicData = (clinics) => {
   return async (dispatch) => {
-
-    dispatch(clinicsActions.uploadClinicImages(clinic));
-    console.log("clinics-actions", clinic);
+    dispatch(
+      detailsActions.showNotification({
+        status: "pending",
+        title: "Sending...",
+        message: "Sending clinic image!",
+      })
+    );
 
     const sendRequest = async () => {
       const response = await fetch(
-        `https://project-1-fa1ee-default-rtdb.firebaseio.com/clinics/clinics/${clinic.id}/images.json`,
+        `https://project-1-fa1ee-default-rtdb.firebaseio.com/clinics/clinics.json`,
         {
           method: "PUT",
-          body: JSON.stringify({ id: clinic.newImage, type: clinic.imageType }),
+          body: JSON.stringify(clinics),
           headers: {
             "Content-Type": "application/json",
-        },
+          },
         }
       );
       if (!response.ok) {
@@ -57,18 +61,17 @@ export const sendClinicData = (clinic) => {
         detailsActions.showNotification({
           status: "success",
           title: "Success...",
-          message: "Sent cart data successfully!",
+          message: "Sent clinic image successfully!",
         })
       );
     } catch (error) {
-      return <p>{error}</p>;
-      // dispatch(
-      //   uiActions.showNotification({
-      //     status: "error",
-      //     title: "Error...",
-      //     message: "Sending cart data failed!",
-      //   })
-      // );
+      dispatch(
+        detailsActions.showNotification({
+          status: "error",
+          title: "Error...",
+          message: "Sending clinic image failed!",
+        })
+      );
     }
   };
 };

@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const clinicDetailsSlice = createSlice({
-    name: "details", 
-    initialState: {
-        detailsAreVisible: false,
-        notifications: null,
-        clinicId: null
+  name: "details",
+  initialState: {
+    detailsAreVisible: false,
+    notifications: null,
+    clinicId: null,
+  },
+  reducers: {
+    toggle(state, action) {
+      state.detailsAreVisible = true;
+      state.clinicId = action.payload;
     },
-    reducers: {
-      toggle(state, action) {
-        state.detailsAreVisible = true;
-        state.clinicId = action.payload;
-      },
-      showNotification(state, action){
-        state.notification = {
-          state: action.payload.status,
-          title: action.payload.title,
-          message: action.payload.message
-        }
-      }
+    showNotification(state, action) {
+      state.notifications = {
+        state: action.payload.status,
+        title: action.payload.title,
+        message: action.payload.message,
+      };
     },
-  });
-  export const detailsActions = clinicDetailsSlice.actions;
-  
-  export default clinicDetailsSlice;
+  },
+});
+export const detailsActions = clinicDetailsSlice.actions;
+
+export default clinicDetailsSlice;

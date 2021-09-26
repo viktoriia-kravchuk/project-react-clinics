@@ -1,9 +1,17 @@
 import React from "react";
 import AllClinicsTableItem from "./AllClinicsTableItem";
+import ClinicDetailsCard from "./ClinicDetailsCard";
+import { useSelector } from "react-redux";
 
 const AllClinicsTable = (props) => {
-
   const allClinics = props.allClinics;
+
+  const detailsAreVisible = useSelector(
+    (state) => state.clinicDetails.detailsAreVisible
+  );
+  const clinicId = useSelector((state) => state.clinicDetails.clinicId);
+
+  const clinic = allClinics.find((clinic) => clinic.id === clinicId);
 
   const clinicsHeader = (
     <tr>
@@ -25,17 +33,19 @@ const AllClinicsTable = (props) => {
         time: clinic.time,
         images: clinic.images,
       }}
-      showDetails={props.showDetails}
     />
   ));
 
   return (
-    <table className="table table-bordered">
-      <tbody>
-        {clinicsHeader}
-        {clinicsTable}
-      </tbody>
-    </table>
+    <div className="card-body">
+      <table className="table table-bordered">
+        <tbody>
+          {clinicsHeader}
+          {clinicsTable}
+        </tbody>
+      </table>
+      {detailsAreVisible && <ClinicDetailsCard clinic={clinic} />}
+    </div>
   );
 };
 export default AllClinicsTable;

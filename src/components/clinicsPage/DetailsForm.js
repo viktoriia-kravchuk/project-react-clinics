@@ -1,66 +1,69 @@
 import React, { useState } from "react";
-import { sendClinicData } from "../../store/clinics-actions";
-import { useDispatch } from "react-redux";
+import { clinicsActions } from "../../store/clinics-slice";
+import { useDispatch, useSelector } from "react-redux";
 
 const DetailsForm = (props) => {
   const dispatch = useDispatch();
-  const [imageInput, setImageInput] = useState("")
+  const [imageInput, setImageInput] = useState("");
   const [selectInput, setSelectInput] = useState("");
 
+  const clinics = useSelector((state) => state.clinics.clinics);
+  const arrayIndex = clinics.findIndex((item) => item.id === props.clinic.id);
+
   const updatedClinicImages = {
-    id: props.clinic.id,
+    arrayIndex: arrayIndex,
     newImage: imageInput,
     imageType: selectInput,
   };
 
-  const uploadImageHandler = () => {
-    dispatch(sendClinicData(updatedClinicImages));
-    console.log("form", updatedClinicImages);
+  const uploadImageHandler = (event) => {
+    event.preventDefault();
+    dispatch(clinicsActions.uploadClinicImages(updatedClinicImages));
+
+    setImageInput("");
+    setSelectInput("");
   };
 
-  const options = [undefined, "Front", "Exterior", "Interior"];
+  const options = ["Front", "Exterior", "Interior"];
+  const selectForm = options.map((option) => (
+    <option value={option} key={option}>
+      {option}
+    </option>
+  ));
+
   return (
     <div className="card-body">
-      <div className="form-group">
-        <label>Image Type</label>
-        <select
-          className="ng-pristine ng-valid ng-empty ng-touched"
-          name="imageType"
-          onChange={(e) => setSelectInput(e.target.value)}
-        >
-          {options.map((option) => (
-            <option value={option}>{option}</option>
-          ))}
-        </select>
-      </div>
-      <br />
-      <div className="form-group">
-        <label>
-          Photo (Select Image it will upload automatically and wait for key *)
-        </label>
-        <input
-          type="text"
-          required
-          name="image"
-          className="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched"
-          onChange={(e) => setImageInput(e.target.value)}
-        />
-      </div>
-      <br />
-      <button
-        className="btn btn-info float-start"
-        type="file"
-        accept="image/*"
-        ngf-max-size="5MB"
-      >
-        Select File
-      </button>
-      <button
-        className="btn btn-primary float-end"
-        onClick={uploadImageHandler}
-      >
-        Upload Image
-      </button>
+      <form onSubmit={uploadImageHandler}>
+        <div className="form-group" key="image">
+          <label>Image Type</label>
+          <select
+            className="ng-pristine ng-valid ng-empty ng-touched"
+            name="imageType"
+            onChange={(e) => setSelectInput(e.target.value)}
+            required
+            value={selectInput}
+          >
+            <option value="undefined" key="undefined">
+              {undefined}
+            </option>
+            {selectForm}
+          </select>
+        </div>
+        <br />
+        <div className="form-group" key="text">
+          <label>Photo (Image source only)</label>
+          <input
+            type="text"
+            required
+            name="image"
+            className="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched"
+            onChange={(e) => setImageInput(e.target.value)}
+            value={imageInput}
+          />
+        </div>
+        <br />
+        <button className="btn btn-primary float-end">Upload Image</button>
+      </form>
     </div>
   );
 };

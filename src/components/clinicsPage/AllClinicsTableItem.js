@@ -1,14 +1,16 @@
 import React from "react";
 import { useDispatch} from "react-redux";
 import { clinicsActions } from "../../store/clinics-slice";
+import { detailsActions } from "../../store/ui-clinic-details-slice";
 
 const AllClinicsTableItem = (props) => {
-  const { id, name, address, time, images} = props.clinicItem;
+  
+  const { id, name, address, time} = props.clinicItem;
 
   const dispatch = useDispatch();
 
   const showDetailsHandler = () => {
-    props.showDetails({ id, name, images });
+    dispatch(detailsActions.toggle(id));
   };
 
   const updateClinicInfoHandler = () => {
