@@ -30,12 +30,13 @@ export const fetchClinicsData = (clinics) => {
 };
 
 export const sendClinicData = (clinics) => {
+  //console.log(clinics);
   return async (dispatch) => {
     dispatch(
       detailsActions.showNotification({
         status: "pending",
         title: "Sending...",
-        message: "Sending clinic image!",
+        message: "Sending clinic data!",
       })
     );
 
@@ -61,7 +62,7 @@ export const sendClinicData = (clinics) => {
         detailsActions.showNotification({
           status: "success",
           title: "Success...",
-          message: "Sent clinic image successfully!",
+          message: "Sent clinic data successfully!",
         })
       );
     } catch (error) {
@@ -69,7 +70,7 @@ export const sendClinicData = (clinics) => {
         detailsActions.showNotification({
           status: "error",
           title: "Error...",
-          message: "Sending clinic image failed!",
+          message: "Sending clinic data failed!",
         })
       );
     }

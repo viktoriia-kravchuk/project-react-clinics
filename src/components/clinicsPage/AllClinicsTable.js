@@ -4,6 +4,7 @@ import ClinicDetailsCard from "./ClinicDetailsCard";
 import { useSelector } from "react-redux";
 
 const AllClinicsTable = (props) => {
+
   const allClinics = props.allClinics;
 
   const detailsAreVisible = useSelector(
@@ -32,6 +33,10 @@ const AllClinicsTable = (props) => {
         address: clinic.address,
         time: clinic.time,
         images: clinic.images,
+        lat: clinic.lat,
+        lng: clinic.lng,
+        clinic_close: clinic.clinic_close,
+        clinic_open: clinic.clinic_open
       }}
     />
   ));

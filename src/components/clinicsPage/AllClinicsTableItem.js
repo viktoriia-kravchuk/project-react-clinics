@@ -1,11 +1,12 @@
-import React from "react";
-import { useDispatch} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { clinicsActions } from "../../store/clinics-slice";
 import { detailsActions } from "../../store/ui-clinic-details-slice";
+import Modal from "../UI/Modal";
+import UpdateForm from "./UpdateForm";
 
 const AllClinicsTableItem = (props) => {
-  
-  const { id, name, address, time} = props.clinicItem;
+  const { id, name, address, time } = props.clinicItem;
 
   const dispatch = useDispatch();
 
@@ -13,8 +14,18 @@ const AllClinicsTableItem = (props) => {
     dispatch(detailsActions.toggle(id));
   };
 
-  const updateClinicInfoHandler = () => {
-    dispatch(clinicsActions.updateClinicInfo(id));
+  const updateClinicInfoHandler = (updatedClinic) => {
+    dispatch(clinicsActions.updateClinicInfo(updatedClinic))
+  }
+
+  const [modalIsShown, setModalIsShown] = useState(false);
+
+  const showModalHandler = () => {
+    setModalIsShown(true);
+  };
+
+  const hideModalHandler = () => {
+    setModalIsShown(false);
   };
 
   return (
@@ -27,10 +38,19 @@ const AllClinicsTableItem = (props) => {
         <button onClick={showDetailsHandler} className="btn btn-primary">
           Details
         </button>{" "}
-        <button onClick={updateClinicInfoHandler} className="btn btn-success">
+        <button onClick={showModalHandler} className="btn btn-success">
           Update
         </button>
       </td>
+      {modalIsShown && (
+        <Modal onClose={hideModalHandler} header="Add Update Clinic">
+          <UpdateForm
+            currentValue={props.clinicItem}
+            onClose={hideModalHandler}
+            updateHandler = {updateClinicInfoHandler}
+          />
+        </Modal>
+      )}
     </tr>
   );
 };

@@ -19,6 +19,7 @@ const clinicDetailsSlice = createSlice({
         message: action.payload.message,
       };
     },
+
   },
 });
 export const detailsActions = clinicDetailsSlice.actions;

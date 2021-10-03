@@ -34,7 +34,20 @@ const clinicsSlice = createSlice({
         },
       };
     },
-    updateClinicInfo(state, action) {},
+    updateClinicInfo(state, action) {
+      state.changed = true;
+      const updatedClinic = action.payload;
+      const clinicArrayIndex = state.clinics.findIndex(
+        (clinic) => clinic.id === updatedClinic.id
+      );
+      state = {
+        ...state,
+        clinics: {
+          ...state.clinics,
+          ...state.clinics[clinicArrayIndex] = updatedClinic,
+        },
+      };
+    },
   },
 });
 
