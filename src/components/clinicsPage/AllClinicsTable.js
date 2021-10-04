@@ -27,6 +27,7 @@ const AllClinicsTable = (props) => {
   const clinicsTable = allClinics.map((clinic) => (
     <AllClinicsTableItem
       key={clinic.id}
+      updateClinic={props.updateClinic}
       clinicItem={{
         id: clinic.id,
         name: clinic.name,

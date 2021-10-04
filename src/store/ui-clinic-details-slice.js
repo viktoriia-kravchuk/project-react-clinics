@@ -19,7 +19,9 @@ const clinicDetailsSlice = createSlice({
         message: action.payload.message,
       };
     },
-
+    hideNotifications(state, action) {
+      state.notifications = null;
+    },
   },
 });
 export const detailsActions = clinicDetailsSlice.actions;

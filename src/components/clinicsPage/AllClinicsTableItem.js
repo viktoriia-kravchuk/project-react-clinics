@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { clinicsActions } from "../../store/clinics-slice";
 import { detailsActions } from "../../store/ui-clinic-details-slice";
 import Modal from "../UI/Modal";
 import UpdateForm from "./UpdateForm";
@@ -13,10 +12,6 @@ const AllClinicsTableItem = (props) => {
   const showDetailsHandler = () => {
     dispatch(detailsActions.toggle(id));
   };
-
-  const updateClinicInfoHandler = (updatedClinic) => {
-    dispatch(clinicsActions.updateClinicInfo(updatedClinic))
-  }
 
   const [modalIsShown, setModalIsShown] = useState(false);
 
@@ -47,7 +42,7 @@ const AllClinicsTableItem = (props) => {
           <UpdateForm
             currentValue={props.clinicItem}
             onClose={hideModalHandler}
-            updateHandler = {updateClinicInfoHandler}
+            updateHandler = {props.updateClinic}
           />
         </Modal>
       )}

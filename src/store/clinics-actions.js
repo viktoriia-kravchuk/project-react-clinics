@@ -74,5 +74,9 @@ export const sendClinicData = (clinics) => {
         })
       );
     }
+    const timer = setTimeout(() => {
+      dispatch(detailsActions.hideNotifications());
+    }, 1000);
+    return () => clearTimeout(timer);
   };
 };

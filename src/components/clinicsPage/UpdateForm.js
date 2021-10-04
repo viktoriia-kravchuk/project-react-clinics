@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Notification from "../UI/Notification";
 
 const UpdateForm = (props) => {
+
   const [clinicData, setClinicData] = useState(props.currentValue);
 
   const handleChange = (event) => {
@@ -79,6 +80,11 @@ const UpdateForm = (props) => {
       clinic_close: enteredClosingHour,
     }));
     props.updateHandler(clinicData);
+
+    const timer = setTimeout(() => {
+      props.onClose();
+    }, 2000);
+    return () => clearTimeout(timer);
   };
 
   return (
@@ -152,7 +158,7 @@ const UpdateForm = (props) => {
           <b>Clinic Opening Hour</b>
         </label>
         <input
-          type="number"
+          type="text"
           id="opening hour"
           name="clinic_open"
           placeholder="Open At"

@@ -12,7 +12,14 @@ const clinicsSlice = createSlice({
       state.clinics = action.payload.clinics;
       state.totalQuantity = action.payload.totalQuantity;
     },
-    addClinic(state, action) {},
+    addClinic(state, action) {
+      state.changed = true;
+      const newClinic = action.payload;
+      newClinic.id = state.clinics.length;
+      newClinic.time = `Morning ${newClinic.clinic_open} - Evening ${newClinic.clinic_close}`;
+      state.totalQuantity++;
+      state.clinics.push(newClinic);
+    },
 
     uploadClinicImages(state, action) {
       const { arrayIndex, newImage, imageType } = action.payload;
