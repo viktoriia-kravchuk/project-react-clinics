@@ -15,14 +15,20 @@
     * Another big difference is that setting a state is asynchronous and setting a ref is synchronous.
 3. If you are referring to component state, then hooks will not help you share it between components. Component state is local to the component. If your state lives in context, then useContext hook would be helpful.
     1. **Lift State Up**
-    Lift state up to a common ancestor component of the two components.
+    Lift state up to a common ancestor component of the two components.  return
+
 
         function Ancestor() {  
+
             const [count, setCount] = useState(999);  
-            return <>  
-            <DescendantA count={count} onCountChange={setCount} />  
+
+            return <>
+
+            <DescendantA count={count} onCountChange={setCount} />        
+
             <DescendantB count={count} onCountChange={setCount} /></>;  
         }  
+
     This state sharing approach is not fundamentally different from the traditional way of using state, hooks just give us a different way to declare component state.
     2. **Context**
     If the descendants are too deep down in the component hierarchy and you don't want to pass the state down too many layers, you could use the Context API.
