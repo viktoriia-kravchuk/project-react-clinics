@@ -98,8 +98,10 @@ const MainDashboard = () => {
   ));
 
   return (
-    <div className="container" style={{ paddingTop: "6%", paddingLeft:"5%", paddingRight:"5%"}}>
+    <div className="home-page" >
+      <div style={{ paddingTop: "6%", paddingLeft:"5%", paddingRight:"5%"}}>
       <div className="row">{itemsList}</div>
+      </div>
     </div>
   );
 };

@@ -135,9 +135,13 @@ html,body {
 /* Hide for mobile, show later */
 
 .home-page{
+    padding: 1%;
+    padding-left: 3%;
+    padding-right: 3%;
     background-color: #4e73df!important;
-background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%)!important;
+    background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%)!important;
     height: 100%!important;
+    width: 100% !important;
 }
 .sidebar {
     display: none;

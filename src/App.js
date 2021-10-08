@@ -4,6 +4,7 @@ import Layout from "./components/layout/Layout";
 import MainDashboard from "./pages/MainDashboard";
 import DashboardAnalytics from "./pages/DashboardAnalytics";
 import Clinics from "./pages/Clinics";
+import Agents from "./pages/Agents";
 
 function App() {
   return (
@@ -20,10 +21,12 @@ function App() {
         <Route path="/dashboard/patiens/followups"></Route>
         <Route path="/dashboard/call-recordings"></Route>
         <Route path="/dashboard/clinics">
-          <Clinics />
+          <Clinics/>
         </Route>
         <Route path="/dashboard/patiens"></Route>
-        <Route path="/dashboard/agents"></Route>
+        <Route path="/dashboard/agents">
+          <Agents/>
+        </Route>
         <Route path="/dashboard/field-agents"></Route>
         <Route path="/dashboard/field-agents/tasks"></Route>
         <Route path="/inventory/medicine-inventory"></Route>

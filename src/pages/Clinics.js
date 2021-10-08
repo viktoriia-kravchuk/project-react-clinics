@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import SideNavigation from "../components/UI/SideNavigation";
 import AllClinicsTable from "../components/clinicsPage/AllClinicsTable";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchClinicsData } from "../store/clinics-actions";
-import { sendClinicData } from "../store/clinics-actions";
+import { clinicsActions } from "../store/clinics-slice";
+import { fetchClinicsData, sendClinicData } from "../store/clinics-actions";
 import Modal from "../components/UI/Modal";
 import UpdateForm from "../components/clinicsPage/UpdateForm";
-import { clinicsActions } from "../store/clinics-slice";
+
 
 let isInitial = true;
 
