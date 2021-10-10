@@ -1,20 +1,38 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { fetchAgentsData } from "../store/agents-actions";
+import { fetchAgentsData, sendAgentsData } from "../store/agents-actions";
+import { fetchClinicsData } from "../store/clinics-actions";
 import SideNavigation from "../components/UI/SideNavigation";
 import PanelList from "../components/agentsPage/PanelList";
 import AgentsList from "../components/agentsPage/AgentsList";
+
+let isInitial = true;
 
 const Agents = (props) => {
   const agents = useSelector((state) => state.agents);
   const selectedFilter = agents.filterStatus;
 
+  // console.log(agents);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchAgentsData());
+    dispatch(fetchClinicsData());
   }, [dispatch]);
-//   console.log(agents);
+ 
+
+
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    if (agents.changed) {
+      dispatch(sendAgentsData(agents.agents));
+    }
+  }, [agents, dispatch]);
+
 
   const filteredAgents =
     selectedFilter !== 0
@@ -22,7 +40,6 @@ const Agents = (props) => {
           return agent.status === selectedFilter;
         })
       : agents.agents;
-
 
   return (
     <div className="row">
@@ -32,7 +49,7 @@ const Agents = (props) => {
           <h4 style={{ marginLeft: "1em" }}>Agents</h4>
           <br />
           <PanelList />
-          <AgentsList agents = {filteredAgents}/>
+          <AgentsList agents={filteredAgents}/>
         </div>
       </div>
     </div>

@@ -10,9 +10,11 @@ const ModalOverlay = (props) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <div className="modal-header"><h5 className="modal-title">{props.header}</h5></div>
-          <div className="modal-body">{props.children}</div>
+        <div className="modal-header">
+          <h5 className="modal-title">{props.header}</h5>
         </div>
+        <div className="modal-body">{props.children}</div>
+      </div>
     </div>
   );
 };

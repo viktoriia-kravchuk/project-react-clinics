@@ -6,7 +6,7 @@ const AgentsList = (props) => {
   return (
     <div className="row" style={{ marginLeft: "1px" }}>
       {props.agents.map((agent) => (
-        <AgentInfoCard agent={agent} key={agent.id}/>
+        <AgentInfoCard agent={agent} key={agent.id} />
       ))}
     </div>
   );

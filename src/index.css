@@ -190,9 +190,9 @@ html,body {
 #side-bar{
     z-index: 10;
 }
-#side-bar ul {
+/* #side-bar ul {
     padding-left: 0 !important;
-}
+} */
 
 #side-bar a{
     color: #fff !important;

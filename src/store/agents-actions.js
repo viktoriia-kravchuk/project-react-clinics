@@ -1,5 +1,6 @@
 import React from "react";
 import { agentsActions } from "./agents-slice";
+import { detailsActions } from "./ui-clinic-details-slice";
 
 export const fetchAgentsData = (agents) => {
     return async (dispatch) => {
@@ -26,3 +27,56 @@ export const fetchAgentsData = (agents) => {
           }
     }
 }
+
+
+export const sendAgentsData = (agents) => {
+
+  return async (dispatch) => {
+    dispatch(
+      detailsActions.showNotification({
+        status: "pending",
+        title: "Sending...",
+        message: "Sending agent data!",
+      })
+    );
+
+    const sendRequest = async () => {
+      const response = await fetch(
+        `https://project-1-fa1ee-default-rtdb.firebaseio.com/clinics/agents.json`,
+        {
+          method: "PUT",
+          body: JSON.stringify(agents),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error("Sending agent data failed");
+      }
+    };
+
+    try {
+      await sendRequest();
+      dispatch(
+        detailsActions.showNotification({
+          status: "success",
+          title: "Success...",
+          message: "Sent agent data successfully!",
+        })
+      );
+    } catch (error) {
+      dispatch(
+        detailsActions.showNotification({
+          status: "error",
+          title: "Error...",
+          message: "Sending agent data failed!",
+        })
+      );
+    }
+    const timer = setTimeout(() => {
+      dispatch(detailsActions.hideNotifications());
+    }, 1000);
+    return () => clearTimeout(timer);
+  };
+};
