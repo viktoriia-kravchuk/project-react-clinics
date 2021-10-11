@@ -16,9 +16,10 @@ const agentsSlice = createSlice({
     setFilterStatus(state, action){
       state.filterStatus = action.payload
     },
-    assignClinic(state, action) {
+    changeAgentInfo(state, action) {
       state.changed = true;
       const updatedAgent = action.payload;
+      // console.log("slice log", updatedAgent);
       const arrayIndex = state.agents.findIndex((agent) => agent.id === updatedAgent.id);
       state = {
         ...state,
@@ -27,9 +28,6 @@ const agentsSlice = createSlice({
           ...state.agents[arrayIndex] = updatedAgent,
         },
       };
-    },
-    deactivateAgent(state, action) {
-      state.changed = true;
     },
   },
 });

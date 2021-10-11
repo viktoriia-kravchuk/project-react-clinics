@@ -11,7 +11,7 @@ const AssignForm = (props) => {
   const dispatch = useDispatch();
 
   const assignClinicHandler = () => {
-    dispatch(agentsActions.assignClinic(agent));
+    dispatch(agentsActions.changeAgentInfo(agent));
     const timer = setTimeout(() => {
       props.onClose();
     }, 3000);

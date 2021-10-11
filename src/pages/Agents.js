@@ -21,8 +21,6 @@ const Agents = (props) => {
     dispatch(fetchClinicsData());
   }, [dispatch]);
  
-
-
   useEffect(() => {
     if (isInitial) {
       isInitial = false;

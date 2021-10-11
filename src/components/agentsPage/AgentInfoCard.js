@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import StatusCard from "./StatusCard";
 import ProfileDetails from "./ProfileDetails";
 import DocumentsDetails from "./DocumentsDetails";
 import Modal from "../UI/Modal";
 import AssignForm from "./AssignForm";
+import { useDispatch } from "react-redux";
+import { agentsActions } from "../../store/agents-slice";
 
 const AgentInfoCard = (props) => {
   const [modalIsShown, setModalIsShown] = useState(false);
+  const [updatedAgent, setUpdatedAgent] = useState(props.agent);
+  const [isUpdated, setIsUpdated] = useState(false);
+  const dispatch = useDispatch();
 
   const showModalHandler = () => {
     setModalIsShown(true);
@@ -14,6 +19,17 @@ const AgentInfoCard = (props) => {
 
   const hideModalHandler = () => {
     setModalIsShown(false);
+  };
+
+  useEffect(() => {
+    if (isUpdated) {
+      dispatch(agentsActions.changeAgentInfo(updatedAgent));
+    }
+  }, [dispatch, updatedAgent]);
+
+  const deactivateAgentHandler = () => {
+    setUpdatedAgent({ ...updatedAgent, status: 11 });
+    setIsUpdated(true);
   };
 
   return (
@@ -38,12 +54,8 @@ const AgentInfoCard = (props) => {
             <button className="btn btn-primary" onClick={showModalHandler}>
               Assign Clinic
             </button>{" "}
-            <button
-              className={
-                props.agent.status === 10 ? "btn btn-danger" : "btn btn-success"
-              }
-            >
-              {props.agent.status === 10 ? "Deactivate" : "Activate"}
+            <button className="btn btn-danger" onClick={deactivateAgentHandler}>
+              Deactivate
             </button>
             {modalIsShown && (
               <Modal onClose={hideModalHandler} header="Assign Clinic">
