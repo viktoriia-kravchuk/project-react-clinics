@@ -5,6 +5,7 @@ import MainDashboard from "./pages/MainDashboard";
 import DashboardAnalytics from "./pages/DashboardAnalytics";
 import Clinics from "./pages/Clinics";
 import Agents from "./pages/Agents";
+import MedicinesInventory from "./pages/MedicinesInventory";
 
 function App() {
   return (
@@ -29,7 +30,9 @@ function App() {
         </Route>
         <Route path="/dashboard/field-agents"></Route>
         <Route path="/dashboard/field-agents/tasks"></Route>
-        <Route path="/inventory/medicine-inventory"></Route>
+        <Route path="/inventory/medicine-inventory">
+          <MedicinesInventory/>
+        </Route>
         <Route path="/inventory/clinic-lab-test"></Route>
         <Route path="/dashboard/clinic/services"></Route>
         <Route path="/dashboard/instructional-videos"></Route>
