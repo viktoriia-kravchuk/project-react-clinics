@@ -8,33 +8,47 @@ import TableBody from "../components/inventoryPage/TableBody";
 let isInitial = true;
 
 const MedicinesInventory = (props) => {
+  const dispatch = useDispatch();
   const inventory = useSelector((state) => state.inventory);
   const sortingStatus = inventory.sortingBy;
-  //console.log("inventory ", inventory);
-  let notSortedMedicines = [...inventory.clinicMedicines];
+  const [searchInput, setSearchInput] = useState("");
+  let notSortedMedicines = [...inventory.clinicMedicines].sort((a, b) => {
+    return b.id - a.id;
+  });
 
-  const sortedMedicines =
-    sortingStatus === "DESC"
-      ? notSortedMedicines.sort((a, b) => a.dose_per_unit - b.dose_per_unit)
-      : sortingStatus === "ASC"
-      ? notSortedMedicines.sort((a, b) => b.dose_per_unit - a.dose_per_unit)
-      : notSortedMedicines;
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setSearchInput(value);
+  };
 
-  const dispatch = useDispatch();
+  let searchedMedicines = notSortedMedicines.filter((medicine) => {
+    if (searchInput !== null) {
+      return medicine.salt
+        .toString()
+        .toLowerCase()
+        .includes(searchInput.toLowerCase());
+    }
+    return medicine;
+  });
+
+  if (sortingStatus === "DESC") {
+    searchedMedicines.sort((a, b) => {
+      return a.dose_per_unit - b.dose_per_unit;
+    });
+  } else if (sortingStatus === "ASC") {
+    searchedMedicines.sort((a, b) => {
+      return b.dose_per_unit - a.dose_per_unit;
+    });
+  }
+
+  // console.log(sortingStatus, searchedMedicines);
 
   useEffect(() => {
     dispatch(fetchClinicsData());
-  }, [dispatch]);
-
-  useEffect(() => {
     if (isInitial) {
       isInitial = false;
       return;
     }
-    // if (inventory.updatedId) {
-    //   console.log(inventory.updatedId)
-    //   dispatch(fetchClinicMedicinesData(inventory.clinicId));
-    // }
   }, [dispatch]);
 
   return (
@@ -43,8 +57,8 @@ const MedicinesInventory = (props) => {
         <SideNavigation />
         <div className="col-md-10 col-xs-12 col-md-offset-2 col-xs-offset-0 report-div">
           <div className="card shadow border-left-primary">
-            <TableHeader/>
-            <TableBody medicines={sortedMedicines} />
+            <TableHeader handleInputChange={handleInputChange} />
+            <TableBody medicines={searchedMedicines} />
           </div>
         </div>
       </div>

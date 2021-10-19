@@ -1,11 +1,9 @@
 import React from "react";
 import TableRowItem from "./TableRowItem";
-import { useSelector } from "react-redux";
 
 const TableBody = (props) => {
     const sortedMedicines = props.medicines;
     //console.log("table", inventory);
-    
   return (
     <div className="card-body">
       <table

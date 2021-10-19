@@ -1,6 +1,6 @@
 import React from "react";
 import { inventoryActions } from "./inventory-slice";
-import { detailsActions } from "../ui-clinic-details-slice";
+// import { detailsActions } from "../ui-clinic-details-slice";
 
 export const fetchClinicMedicinesData = (clinicId) => {
   return async (dispatch) => {
