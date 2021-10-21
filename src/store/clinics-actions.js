@@ -1,12 +1,13 @@
 import React from "react";
 import { clinicsActions } from "./clinics-slice";
 import { detailsActions } from "./ui-clinic-details-slice";
+import { URL } from "../App";
 
 export const fetchClinicsData = (clinics) => {
   return async (dispatch) => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://project-1-fa1ee-default-rtdb.firebaseio.com/clinics/clinics.json"
+        `${URL}/clinics.json`
       );
       if (!response.ok) {
         throw new Error("Could not fetch data!");
@@ -42,7 +43,7 @@ export const sendClinicData = (clinics) => {
 
     const sendRequest = async () => {
       const response = await fetch(
-        `https://project-1-fa1ee-default-rtdb.firebaseio.com/clinics/clinics.json`,
+        `${URL}/clinics.json`,
         {
           method: "PUT",
           body: JSON.stringify(clinics),

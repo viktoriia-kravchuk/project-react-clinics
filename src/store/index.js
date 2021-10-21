@@ -3,6 +3,7 @@ import clinicsSlice from "./clinics-slice";
 import clinicDetailsSlice from "./ui-clinic-details-slice";
 import agentsSlice from "./agents-slice";
 import inventorySlice from "./inventory/inventory-slice";
+import labTestSlice from "./labTests/labTests-slice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     clinicDetails: clinicDetailsSlice.reducer,
     agents: agentsSlice.reducer,
     inventory: inventorySlice.reducer,
+    labTests: labTestSlice.reducer,
   },
 });
 

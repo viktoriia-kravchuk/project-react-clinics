@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchClinicMedicinesData } from "../../store/inventory/inventory-actions";
 
 const SelectForm = (props) => {
+  
   const clinics = useSelector((state) => state.clinics.clinics);
 
   const defaultId = useSelector((state) => state.inventory.clinicId);
@@ -15,7 +16,7 @@ const SelectForm = (props) => {
   };
 
   useEffect(() => {
-    //console.log("selected Clinic Id", selectedClinic);
+    // console.log("selected Clinic Id", selectedClinic);
     dispatch(fetchClinicMedicinesData(selectedClinic));
   }, [dispatch, selectedClinic]);
 

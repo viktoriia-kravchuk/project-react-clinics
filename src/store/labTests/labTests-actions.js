@@ -1,12 +1,12 @@
 import React from "react";
-import { inventoryActions } from "./inventory-slice";
+import { labTestsActions } from "./labTests-slice";
 // import { detailsActions } from "../ui-clinic-details-slice";
 import { URL } from "../../App";
 
-export const fetchClinicMedicinesData = (clinicId) => {
+export const fetchClinicTestsData = (clinicId) => {
   return async (dispatch) => {
     const fetchData = async () => {
-      const response = await fetch(`${URL}/inventory/${clinicId}.json`);
+      const response = await fetch(`${URL}/labTests/${clinicId}.json`);
       if (!response.ok) {
         throw new Error("Could not fetch data!");
       }
@@ -14,12 +14,11 @@ export const fetchClinicMedicinesData = (clinicId) => {
       return data;
     };
     try {
-      const clinicMedicinesData = await fetchData();
-      console.log("action", clinicMedicinesData);
+      const clinicTestsData = await fetchData();
+      console.log("action", clinicTestsData);
       dispatch(
-        inventoryActions.showClinicMedicines({
-          fetchedData: clinicMedicinesData,
-          //totalQuantity: clinicsData.totalQuantity
+        labTestsActions.showClinicLabTests({
+          fetchedData: clinicTestsData,
         })
       );
     } catch (error) {

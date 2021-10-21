@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { agentsActions } from "../../store/agents-slice";
 
 const PanelListItem = (props) => {
-    
   const selectedItem = useSelector((state) => state.agents.filterStatus);
   const activeClass =
     selectedItem === props.id ? "nav-link active" : "nav-link";
+
   const dispatch = useDispatch();
 
   const filterStatusHandler = () => {
