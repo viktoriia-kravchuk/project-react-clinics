@@ -14,6 +14,12 @@ const labTestSlice = createSlice({
       state.clinicId = action.payload.fetchedData.clinic.id;
       state.isLoaded = true;
     },
+    updateLabTest(state, action){
+      state.changed = true;
+      const updatedTest = {...action.payload};
+      delete updatedTest.arrayIndex;
+      state.clinicLabTests.lab_tests[action.payload.arrayIndex] = updatedTest;
+    }
   },
 });
 
