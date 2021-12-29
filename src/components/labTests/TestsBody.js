@@ -13,28 +13,28 @@ const TestsBody = (props) => {
   const [showUpdateTestForm, setShowUpdateTestForm] = useState(false);
   const [updatedTest, setUpdatedTest] = useState(null);
 
-  const showUpdateHandler = (test, i) => {
-    setShowUpdateForm(true);
+  const showUpdateHandler = (test, action) => {
+    const arrayIndex = tests.clinicLabTests.lab_tests.findIndex(
+      (clinicTest) => clinicTest.id === test.id
+    );
+    if (action === "update price") {
+      setShowUpdateForm(true);
+    } else if (action === "update test") {
+      setShowUpdateTestForm(true);
+    }
     const tempTest = {
       ...test,
-      arrayIndex: i,
+      arrayIndex: arrayIndex,
     };
     setUpdatedTest(tempTest);
   };
 
-  const showUpdateTestHandler = (test, i) => {
-    setShowUpdateTestForm(true);
-    const tempTest = {
-      ...test,
-      arrayIndex: i,
-    };
-    setUpdatedTest(tempTest);
-  };
   const hideUpdateFormHandler = () => {
     setShowUpdateForm(false);
     setShowUpdateTestForm(false);
     setUpdatedTest(null);
   };
+  //console.log("states log",showUpdatePriceForm, showUpdateTestForm, updatedTest)
 
   const updateTestHandler = (test) => {
     dispatch(labTestsActions.updateLabTest(test));
@@ -45,7 +45,7 @@ const TestsBody = (props) => {
   };
 
   useEffect(() => {
-    if (tests.changed) {
+    if (tests.changed && updatedTest) {
       dispatch(
         sendClinicTestData(
           tests.clinicId,
@@ -78,15 +78,13 @@ const TestsBody = (props) => {
               <td style={{ width: "21%" }}>
                 <button
                   className="btn btn-success btn-sm m-2"
-                  onClick={(event) => showUpdateHandler(test, i)}
-                  value={i}
+                  onClick={(event) => showUpdateHandler(test, "update price")}
                 >
                   Update Price
                 </button>
                 <button
                   className="btn btn-success btn-sm"
-                  value={i}
-                  onClick={(event) => showUpdateTestHandler(test, i)}
+                  onClick={(event) => showUpdateHandler(test, "update test")}
                 >
                   Update Lab Test
                 </button>
@@ -111,7 +109,7 @@ const TestsBody = (props) => {
             test={updatedTest}
             clinic={props.name}
             onClose={hideUpdateFormHandler}
-            updatePriceHandler={updateTestHandler}
+            updateTestHandler={updateTestHandler}
           />
         </Modal>
       )}

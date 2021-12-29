@@ -7,8 +7,9 @@ import Clinics from "./pages/Clinics";
 import Agents from "./pages/Agents";
 import MedicinesInventory from "./pages/MedicinesInventory";
 import LabTests from "./pages/LabTests";
+import Services from "./pages/Services";
 
-export const URL = "https://clinics-711f2-default-rtdb.europe-west1.firebasedatabase.app/clinics";
+export const URL = "https://clinics-2e161-default-rtdb.europe-west1.firebasedatabase.app/clinics";
 
 function App() {
   return (
@@ -39,7 +40,9 @@ function App() {
         <Route path="/inventory/clinic-lab-test">
           <LabTests/>
         </Route>
-        <Route path="/dashboard/clinic/services"></Route>
+        <Route path="/dashboard/clinic/services">
+          <Services/>
+        </Route>
         <Route path="/dashboard/instructional-videos"></Route>
         <Route path="/audit/activities"></Route>
         <Route path="/expense/all"></Route>

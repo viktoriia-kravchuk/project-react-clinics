@@ -6,7 +6,6 @@ import TestsBody from "./TestsBody";
 const TestsTable = (props) => {
     const labTests = useSelector(state => state.labTests);
     const clinicName = labTests.clinicLabTests.clinic.name;  
-    const clinicId = labTests.clinicLabTests.clinic.id;
     const allTests = [...labTests.clinicLabTests.lab_tests];
     const [searchInput, setSearchInput] = useState("");
 
@@ -30,7 +29,7 @@ const TestsTable = (props) => {
 
     return <div className="card">
         <TestsHeader name={clinicName} handleInputChange = {handleInputChange}/>
-        <TestsBody tests={searchedTests} name={clinicName} clinicId={clinicId}/>
+        <TestsBody tests={searchedTests} name={clinicName}/>
     </div>
 }
 
