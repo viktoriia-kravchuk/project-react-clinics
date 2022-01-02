@@ -1,23 +1,31 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const servicesSlice = createSlice({
-    name:"services",
-    initialState:{
-        clinicServices:[],
-        clinicId: 15,
-        changed: false,
-        totalQuantity: 0,
+  name: "services",
+  initialState: {
+    clinicServices: [],
+    clinicId: 15,
+    clinicName: "Ranwal, Rajasthan",
+    changed: false,
+    totalQuantity: 0,
+  },
+  reducers: {
+    showClinicServices(state, action) {
+      state.clinicServices = action.payload.fetchedData.clinic_services;
+      state.clinicId = action.payload.clinicId;
     },
-    reducers:{
-        showClinicServices(state, action){
-            state.clinicServices= action.payload.fetchedData.clinic_services;
-            state.clinicId = action.payload.clinicId;
-            //console.log("slice", state.clinicMedicines, state.clinicId);
-            //state.totalQuantity = action.payload.fetchedData.medicines.length;
-        },
-
-    }
-})
+    updateServicePrice(state, action) {
+      state.changed = true;
+      const updatedService = { ...action.payload };
+      delete updatedService.index;
+      state.clinicServices[action.payload.index] = updatedService;
+    },
+    setName(state, action) {
+      //console.log("action", action.payload)
+      state.clinicName = action.payload;
+    },
+  },
+});
 
 export const servicesActions = servicesSlice.actions;
 
