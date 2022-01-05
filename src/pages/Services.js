@@ -18,13 +18,14 @@ const Services = (props) => {
       return;
     }
   }, [dispatch]);
+  
     return (
         <div className="row">
           <div className="col-md-12">
             <SideNavigation />
             <div className="col-md-10 col-xs-12 col-md-offset-2 col-xs-offset-0 report-div">
               <div className="card shadow border-left-primary">
-                <ServicesTableHeader/>
+                <ServicesTableHeader clinicServices={services}/>
                 <ServicesTable clinicServices={services.clinicServices}/>
               </div>
             </div>

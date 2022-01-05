@@ -45,7 +45,10 @@ const ServicesTable = (props) => {
   useEffect(() => {
     if (services.changed && showUpdatePriceForm) {
       dispatch(
-        sendServiceData(updatedServiceIndex, services.clinicServices[updatedServiceIndex])
+        sendServiceData(
+          updatedServiceIndex,
+          services.clinicServices[updatedServiceIndex]
+        )
       );
     }
   }, [dispatch, services]);

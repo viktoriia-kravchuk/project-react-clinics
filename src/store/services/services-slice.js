@@ -13,6 +13,7 @@ const servicesSlice = createSlice({
     showClinicServices(state, action) {
       state.clinicServices = action.payload.fetchedData.clinic_services;
       state.clinicId = action.payload.clinicId;
+      state.totalQuantity = action.payload.fetchedData.clinic_services.length;
     },
     updateServicePrice(state, action) {
       state.changed = true;
@@ -23,6 +24,15 @@ const servicesSlice = createSlice({
     setName(state, action) {
       //console.log("action", action.payload)
       state.clinicName = action.payload;
+    },
+    addService(state, action) {
+      state.changed = true;
+      const newService = action.payload;
+      newService.id = state.clinicServices.length + 1;
+      newService.clinic_id = state.clinicId;
+      //console.log("pushing new service slice", newService);
+      state.clinicServices.push(newService);
+      state.totalQuantity = state.clinicServices.length;
     },
   },
 });
