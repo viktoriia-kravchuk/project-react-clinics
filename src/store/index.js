@@ -5,6 +5,7 @@ import agentsSlice from "./agents-slice";
 import inventorySlice from "./inventory/inventory-slice";
 import labTestSlice from "./labTests/labTests-slice";
 import servicesSlice from "./services/services-slice";
+import billsSlice from "./bills/bills-slice";
 
 const store = configureStore({
   reducer: {
@@ -13,7 +14,9 @@ const store = configureStore({
     agents: agentsSlice.reducer,
     inventory: inventorySlice.reducer,
     labTests: labTestSlice.reducer,
-    services: servicesSlice.reducer  },
+    services: servicesSlice.reducer,
+    bills: billsSlice.reducer,
+  },
 });
 
 export default store;
