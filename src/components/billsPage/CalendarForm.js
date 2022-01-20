@@ -17,7 +17,8 @@ const CalendarForm = (props) => {
           isClearable
           showMonthDropdown
           useShortMonthInDropdown
-        />
+        >
+          </DatePicker>
       </div>
     </div>
   );

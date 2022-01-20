@@ -17,7 +17,7 @@ const SelectForm = (props) => {
     <div className="col-md-5">
       <h5>
         Clinic :{" "}
-        <select onChange={onSelectHandler} value={selectedClinic} disabled>
+        <select onChange={onSelectHandler} value={selectedClinic}>
           {clinics.map((clinic) => {
             return (
               <option key={clinic.id} value={clinic.id}>

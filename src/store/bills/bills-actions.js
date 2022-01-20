@@ -3,11 +3,11 @@ import { billsActions} from "./bills-slice";
 //import { detailsActions } from "../ui-clinic-details-slice";
 import { URL } from "../../App";
 
-export const fetchBillsData = () => {
+export const fetchBillsData = (month) => {
     return async (dispatch) => {
         const fetchData = async () => {
             const response = await fetch(
-              `${URL}/bills.json`
+              `${URL}/bills/${month}.json`
             );
             if (!response.ok) {
               throw new Error("Could not fetch data!");

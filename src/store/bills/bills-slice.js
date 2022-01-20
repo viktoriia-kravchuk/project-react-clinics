@@ -1,24 +1,47 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Moment from "react-moment";
+Moment.globalFormat = "MMM D, YYYY h:mm:ss A";
 
-const current = new Date();
-const currentMonth = `${current.getMonth() + 1}`;
-const date = `${current.getDate()}-${
-  current.getMonth() + 1
-}-${current.getFullYear()}`;
+const date = new Date();
+
+const currentMonth = date.getMonth();
+const currentDate = date.toISOString().split("T")[0];
 
 const billsSlice = createSlice({
   name: "bills",
   initialState: {
     clinicBills: [],
     clinicId: 3,
-    selectedDate: date,
+    selectedDate: currentDate,
     selectedMonth: currentMonth,
     changed: false,
-  },
+    monthRevenue: 0,
+    total:0,
+    dayRevenue: 0,
+    discount:0
+    },
   reducers: {
     showClinicBills(state, actions) {
-      state.clinicBills = actions.payload.bills;
-      //console.log("slice", actions.payload.bills);
+      const bills = actions.payload.bills;
+      state.clinicBills = bills;
+      console.log("slice", bills);
+
+      for(var i =0; i< bills.length; i++){
+        const bill = bills[i].bill;
+        state.monthRevenue += bill.paid;
+        state.total+=bill.amount;
+        state.discount+= bill.discount;
+      }
+
+    },
+    setSelectedDate(state, actions) {
+      console.log(
+        "month got changed to: ",
+        new Date(actions.payload).getMonth()
+      );
+      console.log("date got changed to: ", actions.payload);
+      state.selectedMonth = new Date(actions.payload).getMonth();
+      state.selectedDate = actions.payload;
     },
   },
 });
