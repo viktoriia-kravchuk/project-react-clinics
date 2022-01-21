@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Moment from "react-moment";
-Moment.globalFormat = "MMM D, YYYY h:mm:ss A";
 
-const date = new Date();
+const date = new Date('2021-01-01');
 
 const currentMonth = date.getMonth();
 const currentDate = date.toISOString().split("T")[0];
@@ -11,28 +9,17 @@ const billsSlice = createSlice({
   name: "bills",
   initialState: {
     clinicBills: [],
-    clinicId: 3,
+    clinicId: 1,
     selectedDate: currentDate,
     selectedMonth: currentMonth,
-    changed: false,
-    monthRevenue: 0,
-    total:0,
-    dayRevenue: 0,
-    discount:0
+    changed: false
     },
+
   reducers: {
     showClinicBills(state, actions) {
       const bills = actions.payload.bills;
       state.clinicBills = bills;
       console.log("slice", bills);
-
-      for(var i =0; i< bills.length; i++){
-        const bill = bills[i].bill;
-        state.monthRevenue += bill.paid;
-        state.total+=bill.amount;
-        state.discount+= bill.discount;
-      }
-
     },
     setSelectedDate(state, actions) {
       console.log(

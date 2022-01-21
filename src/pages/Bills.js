@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchClinicsData } from "../store/clinics-actions";
 import { fetchBillsData } from "../store/bills/bills-actions";
@@ -28,6 +28,15 @@ const Bills = () => {
   const chosenDay = useSelector((state) =>
     new Date(state.bills.selectedDate).getDate()
   );
+  const monthBills = useSelector((state) => state.bills.clinicBills);
+
+  const filterClinicDayBills = (data) => {
+    return data.filter(
+      (item) => new Date(item.bill.created * 1000).getDate() === chosenDay
+    );
+  };
+
+
 
   useEffect(() => {
     dispatch(fetchClinicsData());
@@ -51,6 +60,7 @@ const Bills = () => {
           <PageSummary
             selectedMonth={monthsArray[chosenMonth]}
             selectedDay={chosenDay}
+            filterDayBills={filterClinicDayBills}
           />
         </div>
       </div>

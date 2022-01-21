@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { billsActions } from "../../store/bills/bills-slice";
 import SelectForm from "./SelectForm";
 import CalendarForm from "./CalendarForm";
 
+
 const PageHeader = (props) => {
-  //const selectedDate = useSelector((state) => state.bills.selectedDate);
-  const [chosenDate, setChosenDate] = useState(new Date());
+  const selectedDate = useSelector((state) => state.bills.selectedDate);
+  const [chosenDate, setChosenDate] = useState(new Date(selectedDate));
   const dispatch = useDispatch();
 
-  console.log(chosenDate);
+  //console.log(chosenDate);
 
   const handleDateChange = (date) => {
+    //console.log("date handler ", date)
     setChosenDate(date);
-    const newDate = date.toISOString().split('T')[0];
-    //console.log("new date", newDate);
-    dispatch(billsActions.setSelectedDate(newDate));
+    const newDate = date;
+    newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    console.log("new date", newDate.toJSON().slice(0, 10));
+    dispatch(billsActions.setSelectedDate(newDate.toJSON().slice(0, 10)));
   };
   
 
