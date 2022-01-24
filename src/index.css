@@ -468,6 +468,15 @@ html,body {
     flex: 1 1 auto;
     padding: 1.25rem;
 }
+.heading{
+
+        font-weight: bold;
+        padding: 10px 15px;
+        border: 1px solid #4e73df;
+        background: #4e73df;
+        color: #fff !important;
+
+}
 
 .card-header {
     padding: .75rem 1.25rem;

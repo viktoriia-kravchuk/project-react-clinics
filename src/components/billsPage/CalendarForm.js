@@ -14,7 +14,6 @@ const CalendarForm = (props) => {
           placeholderText="Select Date"
           calendarStartDay={1}
           showWeekNumbers
-          isClearable
           showMonthDropdown
           useShortMonthInDropdown
         >

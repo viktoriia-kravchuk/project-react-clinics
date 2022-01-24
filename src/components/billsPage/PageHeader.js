@@ -13,7 +13,10 @@ const PageHeader = (props) => {
   //console.log(chosenDate);
 
   const handleDateChange = (date) => {
-    //console.log("date handler ", date)
+    if (date === "reset"){
+      date = new Date("2021-01-01")
+    } 
+    console.log("date handler ", date)
     setChosenDate(date);
     const newDate = date;
     newDate.setMinutes(date.getMinutes() - date.getTimezoneOffset());
@@ -21,6 +24,7 @@ const PageHeader = (props) => {
     dispatch(billsActions.setSelectedDate(newDate.toJSON().slice(0, 10)));
   };
   
+
 
   return (
     <div className="card shadow border-left-primary">
@@ -32,7 +36,7 @@ const PageHeader = (props) => {
               <CalendarForm selectedDate={chosenDate} onChange={handleDateChange} />
               <div className="col-md-6 col-sm-12">
                 <div className="col-md-3">
-                  <button className="btn btn-outline-secondary btn-sm">
+                  <button className="btn btn-outline-secondary btn-sm" onClick={event => handleDateChange("reset")}>
                     Reset
                   </button>
                 </div>

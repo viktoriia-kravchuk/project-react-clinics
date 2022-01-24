@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchClinicsData } from "../store/clinics-actions";
 import { fetchBillsData } from "../store/bills/bills-actions";
 import SideNavigation from "../components/UI/SideNavigation";
 import PageHeader from "../components/billsPage/PageHeader";
 import PageSummary from "../components/billsPage/PageSummary";
+import BillsDetailsTable from "../components/billsPage/BillsDetailsTable";
 
 let isInitial = true;
 const monthsArray = [
@@ -25,6 +26,7 @@ const monthsArray = [
 const Bills = () => {
   const dispatch = useDispatch();
   const chosenMonth = useSelector((state) => state.bills.selectedMonth);
+
   const chosenDay = useSelector((state) =>
     new Date(state.bills.selectedDate).getDate()
   );
@@ -35,8 +37,6 @@ const Bills = () => {
       (item) => new Date(item.bill.created * 1000).getDate() === chosenDay
     );
   };
-
-
 
   useEffect(() => {
     dispatch(fetchClinicsData());
@@ -61,6 +61,14 @@ const Bills = () => {
             selectedMonth={monthsArray[chosenMonth]}
             selectedDay={chosenDay}
             filterDayBills={filterClinicDayBills}
+          />
+          <BillsDetailsTable
+            date={`${chosenDay} ${monthsArray[chosenMonth]}`}
+            bills={filterClinicDayBills(monthBills)}
+          />
+          <BillsDetailsTable
+            date={`${monthsArray[chosenMonth]}`}
+            bills={monthBills}
           />
         </div>
       </div>
