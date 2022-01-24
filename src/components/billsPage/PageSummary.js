@@ -2,8 +2,6 @@ import React, { Fragment } from "react";
 import { useSelector } from "react-redux";
 import CardLayout from "./CardLayout";
 
-
-
 const PageSummary = (props) => {
   //const dispatch = useDispatch();
   const monthBills = useSelector((state) => state.bills.clinicBills);
@@ -11,7 +9,7 @@ const PageSummary = (props) => {
   const dayBills = props.filterDayBills(monthBills);
   const dayBillsStats = getIncomeStats(dayBills);
 
-  console.log(dayBills)
+  console.log(dayBills);
 
   return (
     <Fragment>
@@ -19,7 +17,9 @@ const PageSummary = (props) => {
         <CardLayout
           class="card shadow border-left-primary"
           text={`Revenue Generated in ${props.selectedMonth}`}
-          value={`₹ ${clinicBillsStats.paid + clinicBillsStats.due}`}
+          value={`₹ ${(
+            clinicBillsStats.paid + clinicBillsStats.due
+          ).toLocaleString()}`}
         />
         <CardLayout
           class="card shadow border-left-success"
@@ -32,13 +32,83 @@ const PageSummary = (props) => {
         <CardLayout
           class="card shadow border-left-primary"
           text={`Revenue on ${props.selectedDay} ${props.selectedMonth}`}
-          value={`₹ ${dayBillsStats.paid + dayBillsStats.due}`}
+          value={`₹ ${(
+            dayBillsStats.paid + dayBillsStats.due
+          ).toLocaleString()}`}
         />
         <CardLayout
           class="card shadow border-left-success"
           text={"Total Bill Generated"}
-          value = {dayBills.length}
+          value={dayBills.length}
         />
+      </div>
+      <div className="card shadow border-left-primary">
+        <div className="row">
+          <CardLayout
+            className=""
+            text={`Revenue Generated in ${props.selectedMonth}`}
+            value={`₹ ${(
+              clinicBillsStats.paid + clinicBillsStats.due
+            ).toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
+            text={"Medicines"}
+            value={`₹ ${clinicBillsStats.medicines.toLocaleString()}`}
+          />
+        </div>
+      </div>
+      <div className="card shadow border-left-primary">
+        <div className="row">
+          <CardLayout
+            className=""
+            text={`Revenue Generated in ${props.selectedMonth}`}
+            value={`₹ ${(
+              clinicBillsStats.paid + clinicBillsStats.due
+            ).toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
+            text={"Discount Amount"}
+            value={`₹ ${clinicBillsStats.discount.toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
+            text={"Amount Collected"}
+            value={`₹ ${clinicBillsStats.paid.toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
+            text={"Amount Due"}
+            value={`₹ ${clinicBillsStats.due.toLocaleString()}`}
+          />
+        </div>
+      </div>
+      <div className="card shadow border-left-primary">
+        <div className="row">
+          <CardLayout
+            className=""
+            text={`Generated Revenue for ${props.selectedDay} ${props.selectedMonth}`}
+            value={`₹ ${(
+              dayBillsStats.paid + dayBillsStats.due
+            ).toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
+            text={"Discount"}
+            value={`₹ ${dayBillsStats.discount.toLocaleString()}`}
+          />
+                    <CardLayout
+            className=""
+            text={"Amount Collected"}
+            value={`₹ ${dayBillsStats.paid.toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
+            text={"Amount Due"}
+            value={`₹ ${dayBillsStats.due.toLocaleString()}`}
+          />
+        </div>
       </div>
     </Fragment>
   );
