@@ -15,7 +15,7 @@ const SelectForm = (props) => {
 
   return (
     <div className="col-md-5">
-      <h5>
+      <h4>
         Clinic :{" "}
         <select onChange={onSelectHandler} value={selectedClinic}>
           {clinics.map((clinic) => {
@@ -26,7 +26,7 @@ const SelectForm = (props) => {
             );
           })}
         </select>
-      </h5>
+      </h4>
     </div>
   );
 };

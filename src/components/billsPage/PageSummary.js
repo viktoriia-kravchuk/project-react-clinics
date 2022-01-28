@@ -53,8 +53,18 @@ const PageSummary = (props) => {
           />
           <CardLayout
             className=""
+            text={"Lab Tests"}
+            value={`₹ ${clinicBillsStats.labTests.toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
             text={"Medicines"}
             value={`₹ ${clinicBillsStats.medicines.toLocaleString()}`}
+          />
+          <CardLayout
+            className=""
+            text={"Consultation"}
+            value={`₹ ${clinicBillsStats.consultation.toLocaleString()}`}
           />
         </div>
       </div>
@@ -98,7 +108,7 @@ const PageSummary = (props) => {
             text={"Discount"}
             value={`₹ ${dayBillsStats.discount.toLocaleString()}`}
           />
-                    <CardLayout
+          <CardLayout
             className=""
             text={"Amount Collected"}
             value={`₹ ${dayBillsStats.paid.toLocaleString()}`}
@@ -121,6 +131,9 @@ const getIncomeStats = (data) => {
     total: 0,
     discount: 0,
     medicines: 0,
+    services: 0,
+    labTests: 0,
+    consultation: 0,
     paid: 0,
     due: 0,
   };
@@ -130,6 +143,16 @@ const getIncomeStats = (data) => {
     clinicStats.total += bill.amount;
     clinicStats.discount += bill.discount;
     clinicStats.medicines += getListSum(bill.medicine_invoices);
+    if (bill.service_invoices) {
+      clinicStats.services += getListSum(bill.service_invoices);
+    }
+    if (bill.lab_invoices) {
+      clinicStats.labTests += getListSum(bill.lab_invoices);
+    }
+    if (bill.consultation_invoices) {
+      clinicStats.consultation += getListSum(bill.consultation_invoices);
+    }
+
     if (bill.status === 2) {
       clinicStats.paid += bill.paid;
     } else if (bill.status === 3) {

@@ -7,7 +7,8 @@ import TableBody from "./TableBody";
 const BillsDetailsTable = (props) => {
   return (
     <div className="card shadow border-left-primary">
-      <div className="card-header text-primary">{`Clinic Bills Stats for ${props.date} : ${props.bills.length} Bills Generated`}</div>
+      <div className="card-header text-primary">
+        {`Clinic Bills Stats for ${props.date} : ${props.bills.length} Bills Generated`}</div>
       <div className="card-body">
         <div className="row">
           {props.bills.length === 0 ? (
