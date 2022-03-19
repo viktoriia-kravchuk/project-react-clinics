@@ -11,7 +11,7 @@ import Services from "./pages/Services";
 import Bills from "./pages/Bills";
 
 export const URL =
-  "https://clinics-86dd3-default-rtdb.europe-west1.firebasedatabase.app/clinics";
+  "https://clinics-63c3f-default-rtdb.europe-west1.firebasedatabase.app/clinics";
 
 function App() {
   return (
